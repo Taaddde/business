@@ -1,4 +1,4 @@
-import { BadRequestException, Body, Controller, Get, HttpException, HttpStatus, Inject, Param, Post, Query } from '@nestjs/common';
+import { BadRequestException, Body, Controller, Get, HttpException, HttpStatus, Inject, Post, Query } from '@nestjs/common';
 import { ClientProxy } from '@nestjs/microservices';
 
 import { UserService } from './user.service';
@@ -51,7 +51,7 @@ export class UserController {
     return token;
   }
 
-  @Get('')
+  @Get('/list')
   async getList(
     @Query('page') page: number = 0,
     @Query('limit') limit: number = 10,
