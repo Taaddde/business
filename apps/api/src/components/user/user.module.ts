@@ -4,6 +4,8 @@ import { UserController } from './user.controller';
 import { UserService } from './user.service';
 import { MongooseModule } from '@nestjs/mongoose';
 import { User, UserSchema } from 'shared/schemas/user.schema';
+import { JWTModule } from 'shared/modules/jwt/jwt.module';
+import { CryptModule } from 'shared/modules/crypt/crypt.module';
 
 @Module({
   imports: [
@@ -11,6 +13,8 @@ import { User, UserSchema } from 'shared/schemas/user.schema';
     ClientsModule.register([
       { name: 'BUSINESS_SERVICE', transport: Transport.TCP },
     ]),
+    JWTModule,
+    CryptModule
   ],
   controllers: [UserController],
   providers: [UserService]
