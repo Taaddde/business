@@ -1,10 +1,14 @@
 import { Injectable } from '@nestjs/common';
-import { IUserList, UserModel } from '../../schemas/user.schema';
+import { User } from '../../schemas/user.schema';
+import { InjectModel } from '@nestjs/mongoose';
+import { Model } from 'mongoose';
 
 @Injectable()
 export class UserService {
-  async getUsers(page: number, limit: number, search: string): Promise<IUserList[]> {
-    const result = await UserModel.aggregate([]).exec();
+  constructor(@InjectModel(User.name) private userModel: Model<User>) {}
+
+  async getUsers(page: number, limit: number, search: string): Promise<any[]> {
+    const result = this.userModel.find().skip(page * limit).limit(limit);
     return result;
   }
 }
