@@ -1,4 +1,4 @@
-import { BadRequestException, Body, Controller, Get, HttpException, HttpStatus, Inject, Post, Query } from '@nestjs/common';
+import { BadRequestException, Body, Controller, Get, Headers, HttpException, HttpStatus, Inject, Post, Query } from '@nestjs/common';
 import { ClientProxy } from '@nestjs/microservices';
 
 import { UserService } from './user.service';
@@ -55,8 +55,9 @@ export class UserController {
   async getList(
     @Query('page') page: number = 0,
     @Query('limit') limit: number = 10,
-    @Query('search') search: string = ''
+    @Query('search') search: string = '',
+    @Headers() headers
   ) {
-    return await this.client.send({cmd: 'get_users'}, {page, limit, search});
+    return await this.client.send({cmd: 'get_users'}, {page, limit, search, authorization: headers['authorization']});
   }
 }
