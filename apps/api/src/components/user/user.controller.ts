@@ -1,7 +1,7 @@
 import { BadRequestException, Body, Controller, Get, HttpException, HttpStatus, Inject, Param, Post, Query } from '@nestjs/common';
 import { UserService } from './user.service';
-import { JWTService } from 'shared/modules/jwt/jwt.service';
-import { CryptService } from 'shared/modules/crypt/crypt.service';
+import { JWTService } from '../../../../../shared/modules/jwt/jwt.service';
+import { CryptService } from '../../../../../shared/modules/crypt/crypt.service';
 import { ClientProxy } from '@nestjs/microservices';
 
 @Controller('users')
