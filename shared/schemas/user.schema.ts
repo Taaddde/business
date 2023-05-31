@@ -21,12 +21,5 @@ export const UserSchema = SchemaFactory.createForClass(User);
 export interface IUserList {
     docs: IUser[];
     page: number;
-    totalDocs: number;
     limit: number;
-    nextPage: number;
-    prevPage: number;
-    totalPages: number;
-    pagingCounter: number;
-    hasNextPage: boolean;
-    hasPrevPage: boolean;
 }

@@ -4,7 +4,7 @@ import { JWTService } from 'shared/modules/jwt/jwt.service';
 import { CryptService } from 'shared/modules/crypt/crypt.service';
 import { ClientProxy } from '@nestjs/microservices';
 
-@Controller('user')
+@Controller('users')
 export class UserController {
   constructor(
     @Inject('BUSINESS_SERVICE') private client: ClientProxy,
@@ -21,7 +21,7 @@ export class UserController {
     if (!email || !password) throw new BadRequestException('Email o contraseña no enviado');
 
     const exist = await this.userService.checkExists(email);
-    if (exist) new HttpException('Email en uso', HttpStatus.CONFLICT);
+    if (exist) throw new HttpException('Email en uso', HttpStatus.CONFLICT);
 
     body.password = await this.cryptService.hashPassword(body.password);
     const save = await this.userService.saveUser(body);
@@ -36,7 +36,7 @@ export class UserController {
     if (!email || !password) throw new BadRequestException('Email o password no enviado');
 
     const exist = await this.userService.checkExists(email);
-    if (exist) new HttpException('Email en uso', HttpStatus.CONFLICT);
+    if (!exist) throw new HttpException('Email no existe', HttpStatus.UNAUTHORIZED);
 
     const check = await this.cryptService.comparePasswords(password, exist.password);
 
@@ -48,7 +48,7 @@ export class UserController {
 
   @Get('')
   async getList(
-    @Query('page') page: number = 1,
+    @Query('page') page: number = 0,
     @Query('limit') limit: number = 10,
     @Query('search') search: string = ''
   ) {

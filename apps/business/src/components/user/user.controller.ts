@@ -10,8 +10,9 @@ export class UserController {
   ) {}
 
   @MessagePattern({cmd: 'get_users'})
-  getUsers(data: { page: number; limit: number; search: string }): Promise<IUserList[]> {
+  async getUsers(data: { page: number; limit: number; search: string }): Promise<IUserList> {
     const {page = 0, limit = 10, search = ''} = data;
-    return this.userService.getUsers(page, limit, search)
+    const docs = await this.userService.getUsers(page, limit, search)
+    return docs
   }
 }
