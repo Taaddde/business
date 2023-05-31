@@ -3,8 +3,8 @@ import { ClientProxy } from '@nestjs/microservices';
 
 import { UserService } from './user.service';
 
-import { IsEmailPipe } from '../../decorators/is-email-format.decorator';
-import { IsPasswordPipe } from '../../decorators/is-password-format.decorator';
+import { IsEmailPipe } from '../../pipes/is-email-format.pipe';
+import { IsPasswordPipe } from '../../pipes/is-password-format.pipe';
 
 import { JWTService } from '../../../../../shared/modules/jwt/jwt.service';
 import { CryptService } from '../../../../../shared/modules/crypt/crypt.service';
