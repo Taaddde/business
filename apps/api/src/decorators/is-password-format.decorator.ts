@@ -1,9 +1,11 @@
-import { createParamDecorator, BadRequestException } from '@nestjs/common';
+import { PipeTransform, Injectable, BadRequestException } from '@nestjs/common';
 
-export default createParamDecorator((data, req) => {
-    const password = req.body.password;
-    if (typeof password !== 'string') {
-        throw new BadRequestException('Formato de contraseña inválido');
+@Injectable()
+export class IsPasswordPipe implements PipeTransform {
+  transform(value: any) {
+    if (typeof value !== 'string') {
+      throw new BadRequestException('Invalid password format');
     }
-    return password;
-});
+    return value;
+  }
+}

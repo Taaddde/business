@@ -1,8 +1,13 @@
 import { BadRequestException, Body, Controller, Get, HttpException, HttpStatus, Inject, Param, Post, Query } from '@nestjs/common';
+import { ClientProxy } from '@nestjs/microservices';
+
 import { UserService } from './user.service';
+
+import { IsEmailPipe } from '../../decorators/is-email-format.decorator';
+import { IsPasswordPipe } from '../../decorators/is-password-format.decorator';
+
 import { JWTService } from '../../../../../shared/modules/jwt/jwt.service';
 import { CryptService } from '../../../../../shared/modules/crypt/crypt.service';
-import { ClientProxy } from '@nestjs/microservices';
 
 @Controller('users')
 export class UserController {
@@ -15,16 +20,16 @@ export class UserController {
     
   @Post('/register')
   async register(
-    @Body() body: { email: string; password: string },
+    @Body('email', new IsEmailPipe) email: string,
+    @Body('password', new IsPasswordPipe) password: string
   ) {
-    const { email, password } = body;
     if (!email || !password) throw new BadRequestException('Email o contraseña no enviado');
 
     const exist = await this.userService.checkExists(email);
     if (exist) throw new HttpException('Email en uso', HttpStatus.CONFLICT);
 
-    body.password = await this.cryptService.hashPassword(body.password);
-    const save = await this.userService.saveUser(body);
+    password = await this.cryptService.hashPassword(password);
+    const save = await this.userService.saveUser({email, password});
     return save;
   }
 

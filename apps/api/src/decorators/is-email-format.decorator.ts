@@ -1,10 +1,12 @@
-import { createParamDecorator, BadRequestException } from '@nestjs/common';
+import { PipeTransform, BadRequestException, Injectable } from '@nestjs/common';
 import { isEmail } from 'class-validator';
 
-export default createParamDecorator((data, req) => {
-    const email = req.body.email;
-    if (!isEmail(email)) {
-        throw new BadRequestException('Formato de email inválido');
+@Injectable()
+export class IsEmailPipe implements PipeTransform {
+  transform(value: any) {
+    if (!isEmail(value)) {
+      throw new BadRequestException('Invalid email format');
     }
-    return email;
-});
+    return value;
+  }
+}
