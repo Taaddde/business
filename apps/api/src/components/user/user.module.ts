@@ -15,10 +15,10 @@ import { JwtMiddleware } from '../../middlewares/jwt.middleware';
       { name: 'BUSINESS_SERVICE', transport: Transport.TCP },
     ]),
     JWTModule,
-    CryptModule
+    CryptModule,
   ],
   controllers: [UserController],
-  providers: [UserService]
+  providers: [UserService],
 })
 export class UserModule {
   configure(consumer: MiddlewareConsumer) {

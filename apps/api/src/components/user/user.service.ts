@@ -7,9 +7,8 @@ import { Model } from 'mongoose';
 export class UserService {
   constructor(@InjectModel(User.name) private userModel: Model<User>) {}
 
-
   checkExists(email): Promise<IUser> {
-    const result = this.userModel.findOne({email}).exec();
+    const result = this.userModel.findOne({ email }).exec();
     return result;
   }
 

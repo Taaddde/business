@@ -1,7 +1,6 @@
-import { Injectable, NestMiddleware, UnauthorizedException } from '@nestjs/common';
+import { Injectable, NestMiddleware } from '@nestjs/common';
 import { Request, Response, NextFunction } from 'express';
-import { JWTService } from '../../../../shared/modules/jwt/jwt.service'
-
+import { JWTService } from '../../../../shared/modules/jwt/jwt.service';
 
 @Injectable()
 export class JwtMiddleware implements NestMiddleware {
@@ -13,7 +12,8 @@ export class JwtMiddleware implements NestMiddleware {
     if (!token) return res.status(401).json({ message: 'No autorizado' });
 
     const decodedToken = await this.jwtService.verifyToken(token);
-    if (!decodedToken) return res.status(401).json({ message: 'Token inválido' });
+    if (!decodedToken)
+      return res.status(401).json({ message: 'Token inválido' });
 
     req.user = decodedToken;
     next();
