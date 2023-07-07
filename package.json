@@ -1,11 +1,12 @@
 {
   "name": "microservice-challenge",
   "version": "0.0.1",
-  "description": "",
-  "author": "",
+  "description": "Microservices Challenge is a programming challenge designed for Conexa, utilizing NestJS and MongoDB. It consists of two microservices, 'business' and 'api.' Participants are tasked with developing scalable and modular solutions using microservice architecture to address complex business scenarios efficiently.",
+  "author": "Tadeo Rosochacki",
   "private": true,
   "license": "UNLICENSED",
   "scripts": {
+    "seed": "npx ts-node shared/scripts/seed.ts",
     "prebuild": "rimraf dist",
     "build": "nest build && nest build api",
     "format": "prettier --write \"apps/**/*.ts\" \"libs/**/*.ts\"",
@@ -23,6 +24,7 @@
     "test:e2e": "jest --config ./apps/business/test/jest-e2e.json"
   },
   "dependencies": {
+    "@faker-js/faker": "^8.0.2",
     "@nestjs/common": "^9.0.0",
     "@nestjs/core": "^9.0.0",
     "@nestjs/jwt": "^10.0.3",
@@ -32,6 +34,7 @@
     "@nestjs/platform-express": "^9.0.0",
     "bcrypt": "^5.1.0",
     "class-validator": "^0.14.0",
+    "dotenv": "^16.3.1",
     "mongoose": "^7.2.2",
     "reflect-metadata": "^0.1.13",
     "rimraf": "^3.0.2",
