@@ -65,15 +65,7 @@ To run this project, you will need to add the following environment variables to
 
 ## API Reference
 
-### Auth
-#### Get token
-
-```http
-  GET /auth
-```
-
-### Person
-#### Get list
+#### POST register
 ```http
   POST /users/register
 ```
@@ -83,7 +75,7 @@ To run this project, you will need to add the following environment variables to
     "password": "ImSuperman"
   }
 ```
-#### Get
+#### POST Login
 ```http
   POST /users/login
 ```
@@ -94,7 +86,7 @@ To run this project, you will need to add the following environment variables to
   }
 ```
 
-#### Save new person
+#### GET users list
 ```http
   GET /users/list
 ```
