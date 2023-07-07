@@ -75,7 +75,7 @@ To run this project, you will need to add the following environment variables to
 ### Person
 #### Get list
 ```http
-  POST /register
+  POST /users/register
 ```
 ```json
   {
@@ -85,7 +85,7 @@ To run this project, you will need to add the following environment variables to
 ```
 #### Get
 ```http
-  POST /login
+  POST /users/login
 ```
 ```json
   {
@@ -96,7 +96,7 @@ To run this project, you will need to add the following environment variables to
 
 #### Save new person
 ```http
-  GET /list
+  GET /users/list
 ```
 | Parameter | Type     | Description                |
 | :-------- | :------- | :------------------------- |
