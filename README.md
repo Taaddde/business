@@ -6,7 +6,7 @@
 
 Microservices Challenge is a programming challenge designed for Conexa, utilizing NestJS and MongoDB. It consists of two microservices, 'business' and 'api.' Participants are tasked with developing scalable and modular solutions using microservice architecture to address complex business scenarios efficiently.
 ## Tech Stack
-**Server:** Node (>=18.8.0), Express js, MongoDB
+**Server:** Nest js, Node (>=18.8.0), Express js, MongoDB
 
 
 ## Run Locally
